@@ -1,11 +1,28 @@
 import React from "react";
 import { Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
+import { Remediation } from "../../components/Remediation";
+
+const defaultRemediations = [
+  {
+    id: "enable-auto-vpc-flowlogging",
+    active: false,
+  },
+  {
+    id: "enable-default-serverside-s3-bucket-encryption",
+    active: true,
+  },
+  {
+    id: "EC2",
+    active: false,
+  },
+];
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    maxWidth: "1200px",
+    margin: "0 auto",
   },
   paper: {
     padding: theme.spacing(2),
@@ -16,29 +33,37 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Remediations() {
   const classes = useStyles();
+  const [remediations, updateRemediations] = React.useState(
+    defaultRemediations,
+    []
+  );
+
+  const updateList = (id) => {
+    console.log("updating", id);
+    updateRemediations(
+      remediations.map((r) => (r.id === id ? { ...r, active: !r.active } : r))
+    );
+  };
+
   return (
     <div className={classes.root}>
-      <Grid container spacing={3}>
+      <Grid container spacing={10}>
         {/* <Grid item xs={12}>
           <Paper className={classes.paper}>xs=12</Paper>
         </Grid> */}
         <Grid item xs={12} sm={6}>
-          <Paper className={classes.paper}>xs=12 sm=6</Paper>
+          {remediations
+            .filter((r) => r.active)
+            .map((r) => (
+              <Remediation {...r} updateList={updateList} />
+            ))}
         </Grid>
         <Grid item xs={12} sm={6}>
-          <Paper className={classes.paper}>xs=12 sm=6</Paper>
-        </Grid>
-        <Grid item xs={6} sm={3}>
-          <Paper className={classes.paper}>xs=6 sm=3</Paper>
-        </Grid>
-        <Grid item xs={6} sm={3}>
-          <Paper className={classes.paper}>xs=6 sm=3</Paper>
-        </Grid>
-        <Grid item xs={6} sm={3}>
-          <Paper className={classes.paper}>xs=6 sm=3</Paper>
-        </Grid>
-        <Grid item xs={6} sm={3}>
-          <Paper className={classes.paper}>xs=6 sm=3</Paper>
+          {remediations
+            .filter((r) => !r.active)
+            .map((r) => (
+              <Remediation {...r} updateList={updateList} />
+            ))}
         </Grid>
       </Grid>
     </div>
