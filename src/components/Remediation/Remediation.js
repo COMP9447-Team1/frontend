@@ -1,21 +1,13 @@
 import React from "react";
-import {
-  AppBar,
-  Toolbar,
-  Typography,
-  Button,
-  IconButton,
-  Box,
-} from "@material-ui/core";
+import { Typography, IconButton, Box } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import MenuIcon from "@material-ui/icons/Menu";
 import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
 
 const useStyles = makeStyles((theme) => ({
   text: {
     color: "#3f51b5",
-    width: "90%",
+    width: "95%",
   },
 }));
 

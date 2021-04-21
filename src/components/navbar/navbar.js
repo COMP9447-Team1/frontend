@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   AppBar,
   Toolbar,
@@ -8,6 +8,10 @@ import {
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import MenuIcon from "@material-ui/icons/Menu";
+import Drawer from "@material-ui/core/Drawer";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -18,11 +22,19 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
+    letterSpacing: 15,
+    fontSize: "2em",
+  },
+  menu: {
+    width: 250,
+    color: theme.palette.primary.main,
   },
 }));
 
 export default function NavBar() {
   const classes = useStyles();
+
+  const [menuOpen, setMenu] = useState(false);
 
   return (
     <div className={classes.root}>
@@ -33,15 +45,37 @@ export default function NavBar() {
             className={classes.menuButton}
             color="inherit"
             aria-label="menu"
+            onClick={() => setMenu(true)}
           >
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
-            Remediations
+            SOARDINATOR 3000
           </Typography>
           <Button color="inherit">Login</Button>
         </Toolbar>
       </AppBar>
+      <Drawer anchor={"left"} open={menuOpen} onClose={() => setMenu(false)}>
+        <div
+          className={classes.menu}
+          role="presentation"
+          onClick={() => setMenu(false)}
+          onKeyDown={() => setMenu(false)}
+        >
+          <List>
+            {[
+              "Remediations",
+              "Notification Channels",
+              "Upload Template",
+              "Exceptions",
+            ].map((text, index) => (
+              <ListItem button key={text}>
+                <ListItemText primary={text} />
+              </ListItem>
+            ))}
+          </List>
+        </div>
+      </Drawer>
     </div>
   );
 }

@@ -2,6 +2,7 @@ import React from "react";
 import { Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { Remediation } from "../../components/Remediation";
+import { Typography } from "@material-ui/core";
 
 const defaultRemediations = [
   {
@@ -23,11 +24,14 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     maxWidth: "1200px",
     margin: "0 auto",
+    padding: "0 50px",
   },
-  paper: {
-    padding: theme.spacing(2),
+  heading: {
+    color: theme.palette.primary.main,
+    padding: "20px",
+  },
+  list: {
     textAlign: "center",
-    color: theme.palette.text.secondary,
   },
 }));
 
@@ -51,14 +55,20 @@ export default function Remediations() {
         {/* <Grid item xs={12}>
           <Paper className={classes.paper}>xs=12</Paper>
         </Grid> */}
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={6} className={classes.list}>
+          <Typography variant="h3" className={classes.heading}>
+            Active
+          </Typography>
           {remediations
             .filter((r) => r.active)
             .map((r) => (
               <Remediation {...r} updateList={updateList} />
             ))}
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={6} className={classes.list}>
+          <Typography variant="h3" className={classes.heading}>
+            Available
+          </Typography>
           {remediations
             .filter((r) => !r.active)
             .map((r) => (
