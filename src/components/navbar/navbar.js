@@ -12,6 +12,7 @@ import Drawer from "@material-ui/core/Drawer";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
+import { AmplifySignOut } from "@aws-amplify/ui-react";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -52,7 +53,7 @@ export default function NavBar() {
           <Typography variant="h6" className={classes.title}>
             SOARDINATOR 3000
           </Typography>
-          <Button color="inherit">Login</Button>
+          <AmplifySignOut>Logout</AmplifySignOut>
         </Toolbar>
       </AppBar>
       <Drawer anchor={"left"} open={menuOpen} onClose={() => setMenu(false)}>

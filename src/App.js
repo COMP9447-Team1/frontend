@@ -10,6 +10,11 @@ import { NavBar } from "./components/navbar";
 import { Remediations } from "./pages/remediations";
 import { createMuiTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
+import Amplify from "aws-amplify";
+import awsconfig from "./aws-exports";
+import { AmplifyAuthenticator } from "@aws-amplify/ui-react";
+
+Amplify.configure(awsconfig);
 
 const theme = createMuiTheme({
   palette: {
@@ -28,15 +33,17 @@ function App() {
   return (
     <Router>
       <ThemeProvider theme={theme}>
-        <NavBar />
-        <Switch>
-          <Route exact path="/">
-            <Redirect to="/remediations" />
-          </Route>
-          <Route path="/remediations">
-            <Remediations />
-          </Route>
-        </Switch>
+        <AmplifyAuthenticator>
+          <NavBar />
+          <Switch>
+            <Route exact path="/">
+              <Redirect to="/remediations" />
+            </Route>
+            <Route path="/remediations">
+              <Remediations />
+            </Route>
+          </Switch>
+        </AmplifyAuthenticator>
       </ThemeProvider>
     </Router>
   );

@@ -1,0 +1,45 @@
+{
+    "paths": [
+        {
+            "name": "/delete",
+            "lambdaFunction": "testAmplifyAPI",
+            "privacy": {
+                "protected": true,
+                "auth": [
+                    "/POST",
+                    "/GET",
+                    "/PUT",
+                    "/PATCH",
+                    "/DELETE"
+                ],
+                "unauth": [
+                    "/GET"
+                ]
+            },
+            "policyResourceName": "/delete"
+        }
+    ],
+    "resourceName": "RemediationAPI",
+    "apiName": "RemediationAPI",
+    "functionArns": [
+        {
+            "lambdaFunction": "testAmplifyAPI"
+        }
+    ],
+    "privacy": {
+        "auth": 1,
+        "unauth": 1,
+        "authRoleName": "amplify-frontend-dev-201512-authRole",
+        "unAuthRoleName": "amplify-frontend-dev-201512-unauthRole"
+    },
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "testAmplifyAPI",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        }
+    ]
+}

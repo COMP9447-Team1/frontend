@@ -7,7 +7,7 @@ import { Typography } from "@material-ui/core";
 const defaultRemediations = [
   {
     id: "enable-auto-vpc-flowlogging",
-    active: false,
+    active: true,
   },
   {
     id: "enable-default-serverside-s3-bucket-encryption",
